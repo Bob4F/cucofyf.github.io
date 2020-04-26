@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS8xMS8yMi8xNmU5MWFmNmE2YjQzYmQ0?x-oss-process=image/format,png">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS8xMS8yMi8xNmU5MWIxNmRlNDk5ZDVi?x-oss-process=image/format,png">
 <meta property="article:published_time" content="2020-04-26T07:52:52.000Z">
-<meta property="article:modified_time" content="2020-04-26T07:56:37.160Z">
+<meta property="article:modified_time" content="2020-04-26T08:14:53.433Z">
 <meta property="article:author" content="cuco">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -367,29 +367,14 @@
 </ul>
 </li>
 </ol>
-<h2 id="Stack-Based-Architecture-基于堆栈的架构"><a href="#Stack-Based-Architecture-基于堆栈的架构" class="headerlink" title="Stack-Based Architecture / 基于堆栈的架构"></a>Stack-Based Architecture / 基于堆栈的架构</h2><p><strong>PC register / PC 寄存器</strong>: for each thread running in a Java program, a PC register stores the address of the current instruction.</p>
-<blockquote>
-<p>在 Java 程序上运行的线程，PC 寄存器存储指令的地址</p>
-</blockquote>
-<p><strong>JVM stack</strong>: for each thread, a stack is allocated where local variables, method arguments, and return values are stored. Here is an illustration showing stacks for 3 threads.</p>
-<blockquote>
-<p>对每个线程，分配一个堆栈用来存储局部变量，方法参数，返回值。下面显示三个线程的堆栈</p>
-</blockquote>
+<h2 id="Stack-Based-Architecture-基于堆栈的架构"><a href="#Stack-Based-Architecture-基于堆栈的架构" class="headerlink" title="Stack-Based Architecture / 基于堆栈的架构"></a>Stack-Based Architecture / 基于堆栈的架构</h2><p><strong>PC register / PC 寄存器</strong>: 在 Java 程序上运行的线程，PC 寄存器存储指令的地址</p>
+<p><strong>JVM stack</strong>: 对每个线程，分配一个堆栈用来存储局部变量，方法参数，返回值。下面显示三个线程的堆栈</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS8xMS8yMi8xNmU5MTlhMDBhM2FjNzI5?x-oss-process=image/format,png" alt="JVM_stack"></p>
-<p><strong>Heap</strong>: memory shared by all threads and storing objects (class instances and arrays). Object deallocation is managed by a garbage collector.</p>
-<blockquote>
-<p>所有线程内存共享(公共区),存储对象(类实例和数组),对象释放管理是通过垃圾回收</p>
-</blockquote>
+<p><strong>Heap</strong>: 所有线程内存共享(公共区),存储对象(类实例和数组),对象释放管理是通过垃圾回收</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS8xMS8yMi8xNmU5MTliZjE4NGU1NWEy?x-oss-process=image/format,png" alt="Heap"></p>
-<p><strong>Method area</strong>: for each loaded class, it stores the code of methods and a table of symbols (e.g. references to fields or methods) and constants known as the constant pool.</p>
-<blockquote>
-<p>对所有已加载的类，存储方法的代码和符号表(ps:说是对字段和方法的引用) 和被称为常量池的常量,下图展示了程序运行时常量池都能放了什么</p>
-</blockquote>
+<p><strong>Method area</strong>: 对所有已加载的类，存储方法的代码和符号表(ps:说是对字段和方法的引用) 和被称为常量池的常量,下图展示了程序运行时常量池都能放了什么</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS8xMS8yMi8xNmU5MWFmNmE2YjQzYmQ0?x-oss-process=image/format,png" alt="Method_area"></p>
-<p>A JVM stack is composed of frames, each pushed onto the stack when a method is invoked and popped from the stack when the method completes (either by returning normally or by throwing an exception). Each frame further consists of:</p>
-<blockquote>
-<p>JVM 堆栈由帧组成，当一个方法被调用时，会推送帧到堆栈中，当方法执行完成，会从堆栈中推出(正常返回或是抛出异常)。帧包含了:</p>
-</blockquote>
+<p> JVM 堆栈由帧组成，当一个方法被调用时，会推送帧到堆栈中，当方法执行完成，会从堆栈中推出(正常返回或是抛出异常)。帧包含了:</p>
 <ul>
 <li>An array of local variables, indexed from 0 to its length minus 1. The length is computed by the compiler.<br>A local variable can hold a value of any type, except long and double values, which occupy two local variables.</li>
 </ul>
@@ -403,8 +388,11 @@
 <p>用于存储中间值的操作数堆栈，该中间值将用作指令的操作数，以及推送参数到方法调用</p>
 </blockquote>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS8xMS8yMi8xNmU5MWIxNmRlNDk5ZDVi?x-oss-process=image/format,png" alt="img"></p>
-<h2 id="Bytecode-Expolored"><a href="#Bytecode-Expolored" class="headerlink" title="Bytecode Expolored"></a>Bytecode Expolored</h2><p>每条指令都有遵循以下格式:<br><code>opcode (1 byte)      operand1 (optional)      operand2 (optional)</code></p>
-<p>1byte大小的操作码,包含要操作数据的操作数</p>
+<h2 id="Bytecode-Expolored"><a href="#Bytecode-Expolored" class="headerlink" title="Bytecode Expolored"></a>Bytecode Expolored</h2><p>每条指令都有遵循以下格式:  </p>
+<blockquote>
+<p><code>opcode (1 byte)      operand1 (optional)      operand2 (optional)</code></p>
+</blockquote>
+<p>1byte的操作码,包含要操作数据的操作数</p>
 <h3 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> c = a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通过 <code>javap</code> 工具查看字节码文件的操作,仅展示指令集</p>
